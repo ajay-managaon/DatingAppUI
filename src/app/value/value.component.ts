@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class ValueComponent implements OnInit {
 
   values: any;
-   private url = 'http://localhost:5000/Values';
+   private url = 'http://localhost:51446/Values';
 
   constructor(private http: HttpClient) { }
   
