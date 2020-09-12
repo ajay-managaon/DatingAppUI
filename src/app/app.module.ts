@@ -12,15 +12,21 @@ import { HomeComponent } from "./home/home.component";
 import { RegisterComponent } from "./register/register.component";
 import { ErrorInterceptorProvider } from "./errors/error.interceptor";
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { ListsComponent } from './lists/lists.component';
+import { MemberListsComponent } from './member-lists/member-lists.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
-  declarations: [
+  declarations: [			
     AppComponent,
     ValueComponent,
     NavComponent,
     HomeComponent,
     RegisterComponent,
-  ],
+      ListsComponent,
+      MemberListsComponent,
+      MessagesComponent
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,
