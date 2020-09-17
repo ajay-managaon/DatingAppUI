@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {map} from 'rxjs/operators'
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,7 +10,7 @@ export class AuthService {
 
   jwtHelper = new JwtHelperService();
   decodedToken: any;
-  private url = 'http://localhost:1001/Auth/';
+  private url =  environment.apiUrl +'Auth/';
   constructor(private _http: HttpClient) { }
   
   login(model: any) {
