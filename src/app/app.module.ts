@@ -1,4 +1,8 @@
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from "@angular/platform-browser";
+import {
+  BrowserModule,
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -17,23 +21,27 @@ import { MemberListsComponent } from "./members/member-lists/member-lists.compon
 import { MessagesComponent } from "./messages/messages.component";
 import { MemberCardComponent } from "./members/member-card/member-card.component";
 import { JwtModule } from "@auth0/angular-jwt";
-import { environment } from 'src/environments/environment';
-import { MemberDetailComponent } from './members/member-detail/member-detail.component';
-import { MemberDetailResolver } from './resolver/member-detail.resolver';
-import { MemberListResolver } from './resolver/member-list.resolver';
-import { NgxGalleryModule } from 'ngx-gallery';
+import { environment } from "src/environments/environment";
+import { MemberDetailComponent } from "./members/member-detail/member-detail.component";
+
+import { NgxGalleryModule } from "ngx-gallery";
+import { MemberEditComponent } from "./members/member-edit/member-edit.component";
+
+import { MemberDetailResolver } from "./resolver/member-detail.resolver";
+import { MemberListResolver } from "./resolver/member-list.resolver";
+import { MemberEditResolver } from "./resolver/member-edit.resolver";
+import { PreventNavigation } from './authguards/prevent-navigation';
 
 export function tokenGetter() {
   return localStorage.getItem("token");
 }
 
-export class CustomHammerConfig extends HammerGestureConfig  {
+export class CustomHammerConfig extends HammerGestureConfig {
   overrides = {
-      pinch: { enable: false },
-      rotate: { enable: false }
+    pinch: { enable: false },
+    rotate: { enable: false },
   };
 }
-
 
 @NgModule({
   declarations: [
@@ -46,7 +54,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     MemberListsComponent,
     MessagesComponent,
     MemberCardComponent,
-    MemberDetailComponent
+    MemberDetailComponent,
+    MemberEditComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +67,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       config: {
         tokenGetter: tokenGetter,
         allowedDomains: [environment.jwtUrl],
-        disallowedRoutes:[environment.jwtAuthUrl]
+        disallowedRoutes: [environment.jwtAuthUrl],
       },
     }),
     BsDropdownModule.forRoot(),
@@ -69,7 +78,9 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     ErrorInterceptorProvider,
     MemberDetailResolver,
     MemberListResolver,
-    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
+    MemberEditResolver,
+    PreventNavigation,
+    { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig },
   ],
   bootstrap: [AppComponent],
 })
